@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #232b44;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #232b44;
+  outline: none;
+}
+
+h1 {
+  color: purple;
+}
+
+p {
+  color:blue;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: rgb(63, 243, 8);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f704ce;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+.head
+{
+    vertical-align: top;
+}
+.container {
+  background-color:black;
+  color:white;
+  padding: 16px;
+  vertical-align: top;
+}
+.container2 {
+  padding: 16px;
+}
+.left
+{
+  margin: auto;
+  text-align:center;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+</style>
+<body>
+<div class="container">
+  <h1>G-Fighters</h1>
+    <div class = "head">
+        <div class = "rightright">
+            <form action="/login_successful" method="POST">
+              <table>
+                  <tr>
+                    <td>Login</td>
+                    <td>Email:</td>
+                    <td><input type="email" placeholder="Enter Email" name="email" required></td>
+                    <td>Password:</td>
+                    <td><input type="password" placeholder="Enter Password" name="psw" required></td>
+                    <td><button type="submit">Login</button></td>
+                  </tr>
+                </table>
+              </form>
+        </div>
+    </div>
+    <div class = "left">
+        <form action="/success" method="POST">
+            <h1>Registration</h1>
+            <hr>
+            <p>First Name:</p>
+            <input type="text" placeholder="Enter first name" name="fname" required>
+        
+            <p>Last Name:</p>
+            <input type="text" placeholder="Enter last name" name="lname" required>
+        
+            <p>Email:</p>
+            <input type="email" placeholder="Enter Email" name="email" required>
+            <p></p>
+            <p>Password:</p>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+        
+            <p>Confirm password:</p>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+        
+            <div class="clearfix">
+              <button type="submit" class="signupbtn">Sign Up</button>
+            </div>
+          </form>
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class=flashes>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+      </div>
+</div>
+</body>
+</html>

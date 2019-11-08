@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+.container {
+  background-color:black;
+  color:white;
+  padding: 16px;
+  vertical-align: top;
+}
+
+.container2 {
+  background-color:bisque;
+  color:white;
+  padding: 10px;
+}
+
+h1 {
+  color: purple;
+}
+
+p {
+  color:blue;
+}
+
+table {
+  border-color:black;
+  height: 5px;
+}
+tr {
+  background-color:black;
+}
+td {
+  width: 200px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: rgb(63, 243, 8);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #232b44;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #232b44;
+  outline: none;
+}
+
+.mes {
+  margin: 5px;
+}
+
+.left
+{
+display:inline-block;
+vertical-align:top;
+}
+.right
+{
+display:inline-block;
+vertical-align:top;
+border-color:blue;
+}
+.head
+{
+    vertical-align: top;
+}
+.leftleft
+{
+display:inline-block;
+vertical-align:top;
+}
+.rightright
+{
+display:inline-block;
+vertical-align:top; 
+}
+
+</style>
+</head>
+<body>
+    <div class = "container">
+        <div class = "head">
+            <div class = "leftleft">
+                <table>
+                    <tr>
+                      <td><form action="/gfighters/wall" method="POST">
+              
+                          <button type="submit" class="signupbtn">Wall</button>
+                        
+                      </form></td>
+                      <td><form action="/gfighters/feed" method="POST">
+              
+                      <button type="submit" class="signupbtn">Feed</button>
+                    
+                      </form></td>
+                      <td><form action="/gfighters/profile" method="POST">
+              
+                        <button type="submit" class="signupbtn">Profile</button>
+                    
+                      </form></td>
+                      <td><form action="/gfighters/list" method="POST">
+              
+                        <button type="submit" class="signupbtn">List of G-Fighters</button>
+                    
+                      </form></td>
+                      <td>
+                          {% for one_result in all_results %}
+                            <p>Welcome {{one_result.first_name}}! </p>
+                          {% endfor %}
+                      </td>
+                      <td>
+                        <form action="/logout" method="POST">
+                          <button type="submit" class="signupbtn">Logout</button>
+                        </form>
+                    </td>
+                    </tr>
+                  </table>
+            </div>
+        </div>
+        <div class = "left">
+            {% for one_opp in all_opp %}
+          <form action="/new/{{one_opp.first_name}}/wall"method="POST">
+            <h1>Post Message</h1>
+            <hr>
+            <p>Title:</p>
+            <input type="text" placeholder="Enter title" name="title" required>
+            <p></p>
+            <p>Description:</p>
+            <input type="text" placeholder="Enter description" name="desc" required>
+            <p></p>
+            <div class="clearfix">
+              <button type="submit" class="signupbtn">Add</button>
+            </div>
+          </form>
+          {% endfor %}
+          {% for one_opp in all_opp %}
+              <h1>{{one_opp.first_name}}'s Wall:</h1>
+          {% endfor %}
+          <div class = "mes">
+            {% for one_me in all_me %}
+              <p>Title: {{one_me["title"]}}</p>
+              <p>Message: {{one_me["description"]}}</p>
+              <p>Posted on: {{one_me["created_at"]}}</p>
+            {% endfor %}
+        </div>
+        
+      </div> 
+      <div class = "right">
+      <h5>Other G-Fighters</h5>
+        
+      <div class = "mes">
+        {% for one_user in all_users %}
+          <p>Title: {{one_user["title"]}}</p>
+          <p>Message: {{one_user["description"]}}</p>
+          <p>Posted on: {{one_user["created_at"]}}</p>
+          <form action="/gfighters/{{one_user.id}}/destroy" method="POST">
+
+            <button type="submit" class="signupbtn" name="ide">Remove</button>
+
+          </form>
+        {% endfor %}
+    </div>
+      </div>
+    </div>
+</body>
+</html>
